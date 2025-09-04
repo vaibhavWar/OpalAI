@@ -1,0 +1,30 @@
+{
+  "name": "optimizely-product-description-tool",
+  "version": "1.0.0",
+  "description": "Custom Optimizely Opal tool for generating product descriptions",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:staging": "wrangler deploy --env staging"
+  },
+  "dependencies": {
+    "@optimizely-opal/opal-tools-sdk": "^0.1.0-dev"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20241218.0",
+    "@types/node": "^24.0.14",
+    "typescript": "^5.8.3",
+    "wrangler": "^4.24.3"
+  },
+  "keywords": [
+    "optimizely",
+    "opal",
+    "ai",
+    "product-description",
+    "marketing"
+  ],
+  "author": "Your Name",
+  "license": "MIT"
+}
