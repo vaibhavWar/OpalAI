@@ -1,3 +1,5 @@
+import { tool } from '@optimizely-opal/opal-tools-sdk';
+
 // TypeScript interfaces for the product description generator tool
 
 interface ProductDescriptionParams {

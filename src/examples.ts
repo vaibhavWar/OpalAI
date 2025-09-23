@@ -1,4 +1,7 @@
 // Test examples for the Optimizely Opal Product Description Generator Tool
+// Updated to demonstrate @optimizely-opal/opal-tools-sdk integration
+
+import { generateProductDescription } from './product-description';
 
 // Example 1: Basic product description request
 const basicRequest = {
@@ -217,6 +220,77 @@ const complexRequest = {
   maxLength: 600
 };
 
+// SDK Integration Examples
+
+// Example function to test the SDK-decorated tool
+async function testSDKIntegration() {
+  console.log('Testing @optimizely-opal/opal-tools-sdk integration...');
+  
+  try {
+    // Test with basic request
+    const result = await generateProductDescription(basicRequest);
+    console.log('✅ SDK Integration Test Result:', result);
+    
+    if (result.success) {
+      console.log('📝 Generated Description:', result.description);
+      console.log('📊 Metadata:', result.metadata);
+    } else {
+      console.error('❌ Error:', result.error);
+    }
+  } catch (error) {
+    console.error('❌ SDK Integration Test Failed:', error);
+  }
+}
+
+// Example function to demonstrate different description types
+async function demonstrateDescriptionTypes() {
+  const examples = [
+    { name: 'Marketing', request: marketingRequest },
+    { name: 'Technical', request: technicalRequest },
+    { name: 'Ecommerce', request: ecommerceRequest }
+  ];
+
+  for (const example of examples) {
+    console.log(`\n🔄 Testing ${example.name} Description Type:`);
+    try {
+      const result = await generateProductDescription(example.request as any);
+      if (result.success) {
+        console.log(`✅ ${example.name} Description Generated Successfully`);
+        console.log(`📝 Preview: ${result.description.substring(0, 100)}...`);
+      } else {
+        console.error(`❌ ${example.name} Description Failed:`, result.error);
+      }
+    } catch (error) {
+      console.error(`❌ ${example.name} Description Error:`, error);
+    }
+  }
+}
+
+// Example function to test parameter validation
+async function testParameterValidation() {
+  console.log('\n🧪 Testing Parameter Validation...');
+  
+  const invalidRequests = [
+    { name: 'Missing productName', request: { partNumber: 'TEST-001', attributes: [{ name: 'Test', value: 'Value' }] } },
+    { name: 'Missing partNumber', request: { productName: 'Test Product', attributes: [{ name: 'Test', value: 'Value' }] } },
+    { name: 'Empty attributes', request: { productName: 'Test Product', partNumber: 'TEST-001', attributes: [] } }
+  ];
+
+  for (const test of invalidRequests) {
+    console.log(`\n🔍 Testing: ${test.name}`);
+    try {
+      const result = await generateProductDescription(test.request as any);
+      if (!result.success) {
+        console.log(`✅ Validation Working: ${result.error}`);
+      } else {
+        console.log(`❌ Validation Failed: Should have rejected invalid request`);
+      }
+    } catch (error) {
+      console.log(`✅ Validation Working: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+}
+
 // Export all examples for testing
 export {
   basicRequest,
@@ -225,5 +299,8 @@ export {
   marketingRequest,
   electronicsRequest,
   minimalRequest,
-  complexRequest
+  complexRequest,
+  testSDKIntegration,
+  demonstrateDescriptionTypes,
+  testParameterValidation
 };
