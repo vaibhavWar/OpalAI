@@ -1,5 +1,5 @@
 import { ToolsService, tool } from '@optimizely-opal/opal-tools-sdk';
-import { generateProductDescription, ProductDescriptionParams } from './product-description';
+import { generateProductDescription, ProductDescriptionParams } from './product-description.js';
 
 // Define the product description tool using the SDK decorator
 class ProductDescriptionTool {

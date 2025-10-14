@@ -1,7 +1,7 @@
 // Test examples for the Optimizely Opal Product Description Generator Tool
 // Updated to demonstrate @optimizely-opal/opal-tools-sdk integration
 
-import { generateProductDescription } from './product-description';
+import { generateProductDescription } from './product-description.js';
 
 // Example 1: Basic product description request
 const basicRequest = {
